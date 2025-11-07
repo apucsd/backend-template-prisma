@@ -14,6 +14,7 @@ app.use(
         origin: [
             'http://localhost:3001',
             'http://localhost:3000',
+            'http://localhost:5173',
             'http://172.252.13.78:3014',
             'https://bretervin.tamshyah.com',
         ],

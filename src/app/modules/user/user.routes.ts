@@ -8,7 +8,7 @@ import { userValidation } from './user.validation';
 
 const router = express.Router();
 
-router.get('/', auth('SUPERADMIN'), UserControllers.getAllUsers);
+router.get('/', auth('ANY'), UserControllers.getAllUsers); // todo: it should be for admin
 router.get('/me', auth('ANY'), UserControllers.getMyProfile);
 router.get('/:id', auth('ANY'), UserControllers.getUserDetails);
 

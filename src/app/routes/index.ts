@@ -4,6 +4,7 @@ import { NotificationsRouters } from '../modules/notification/notification.route
 import { AuthRouters } from '../modules/auth/auth.routes';
 import { AssetRouters } from '../modules/asset/asset.route';
 import { UserRouters } from '../modules/user/user.routes';
+import { TodoRouters } from '../modules/todo/todo.route';
 const router = express.Router();
 
 const moduleRoutes = [
@@ -26,6 +27,10 @@ const moduleRoutes = [
     {
         path: '/assets',
         route: AssetRouters,
+    },
+    {
+        path: '/todos',
+        route: TodoRouters,
     },
 ];
 

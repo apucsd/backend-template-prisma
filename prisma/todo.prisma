@@ -1,0 +1,13 @@
+model Todo {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  description    String?
+  completed      Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime? @updatedAt
+  priority       String?   @default("low")
+  assignedTo     String?   @db.ObjectId
+  assignedToUser User?     @relation("AssignedToTodos", fields: [assignedTo], references: [id])
+
+  @@map("todos")
+}

@@ -25,6 +25,7 @@ model User {
   receivedMessages Message[]          @relation("ReceivedMessages")
   payments         Payment[]
   notifications    NotificationUser[]
+  receivedTodos    Todo[]             @relation("AssignedToTodos")
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
 

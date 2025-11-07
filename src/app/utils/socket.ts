@@ -1,20 +1,18 @@
-import { Server as SocketIOServer } from "socket.io";
-import AppError from "../errors/AppError";
-import httpStatus from "http-status";
+import { Server as SocketIOServer } from 'socket.io';
+import AppError from '../errors/AppError';
+import httpStatus from 'http-status';
 
 let initialIo: SocketIOServer;
 export const initSocket = (server: any) => {
     initialIo = new SocketIOServer(server, {
         cors: {
-            origin: ['http://localhost:3000', 'http://localhost:3001'],
+            origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
             credentials: true,
         },
-        transports: ['websocket', 'polling']
+        transports: ['websocket', 'polling'],
     });
-    return initialIo
-}
-
-
+    return initialIo;
+};
 
 export const getSocket = () => {
     if (!initialIo) {
@@ -22,4 +20,3 @@ export const getSocket = () => {
     }
     return initialIo;
 };
-
