@@ -23,9 +23,10 @@ const auth = <T extends readonly (UserRoleEnum | 'ANY')[]>(...roles: NoDuplicate
                 throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!');
             }
 
-            const verifyUserToken = verifyToken(token, config.jwt.access_secret as Secret);
+            const tokenWithoutBearer = token.split(' ')[1];
+            const verifyUserToken = verifyToken(tokenWithoutBearer, config.jwt.access_secret as Secret);
 
-            console.log(verifyUserToken, 'verifyUserToken');
+            // console.log(verifyUserToken, 'verifyUserToken');
 
             // Check user is exist
             const user = await insecurePrisma.user.findUniqueOrThrow({
