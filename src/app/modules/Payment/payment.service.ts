@@ -7,7 +7,14 @@ import { UserRoleEnum } from '@prisma/client';
 const getAllPayments = async (query: Record<string, any>) => {
     const paymentQuery = new QueryBuilder<typeof prisma.payment>(prisma.payment, query);
     const result = await paymentQuery
-        .search(['user.firstName', 'user.lastName', 'user.email', 'product.title', 'stripePaymentId', 'stripeSessionId'])
+        .search([
+            'user.firstName',
+            'user.lastName',
+            'user.email',
+            'product.title',
+            'stripePaymentId',
+            'stripeSessionId',
+        ])
         .filter()
         .sort()
         .customFields({
@@ -25,19 +32,17 @@ const getAllPayments = async (query: Record<string, any>) => {
                     profile: true,
                     firstName: true,
                     lastName: true,
-                    email: true
-                }
+                    email: true,
+                },
             },
-            
-          
         })
         .exclude()
         .paginate()
-        .execute()
-    return result
+        .execute();
+    return result;
 };
 
-const singleTransactionHistory = async (query: { id: string, userId?: string }) => {
+const singleTransactionHistory = async (query: { id: string; userId?: string }) => {
     const result = await prisma.payment.findUnique({
         where: query,
         select: {
@@ -57,18 +62,17 @@ const singleTransactionHistory = async (query: { id: string, userId?: string }) 
                     profile: true,
                     firstName: true,
                     lastName: true,
-                    email: true
-                }
+                    email: true,
+                },
             },
-           
-        }
+        },
     });
     if (!result) {
-        throw new AppError(httpStatus.NOT_FOUND, 'Transaction history not found')
+        throw new AppError(httpStatus.NOT_FOUND, 'Transaction history not found');
     }
-    return result
-}
-const singleTransactionHistoryBySessionId = async (query: { stripeSessionId: string, userId?: string }) => {
+    return result;
+};
+const singleTransactionHistoryBySessionId = async (query: { stripeSessionId: string; userId?: string }) => {
     const result = await prisma.payment.findUnique({
         where: query,
         select: {
@@ -88,37 +92,32 @@ const singleTransactionHistoryBySessionId = async (query: { stripeSessionId: str
                     profile: true,
                     firstName: true,
                     lastName: true,
-                    email: true
-                }
+                    email: true,
+                },
             },
-          
-        }
+        },
     });
     if (!result) {
-        throw new AppError(httpStatus.NOT_FOUND, 'Transaction history not found')
+        throw new AppError(httpStatus.NOT_FOUND, 'Transaction history not found');
     }
-    return result
-}
+    return result;
+};
 
 const cancelPayment = async (id: string, userId: string, role: UserRoleEnum) => {
     return await prisma.payment.update({
         where: {
             id,
-            ...(role !== 'SUPERADMIN' && { userId })
+            ...(role !== 'SUPERADMIN' && { userId }),
         },
         data: {
-            status: 'CANCELED'
+            status: 'CANCELED',
         },
-    })
-
-}
-
-
-
+    });
+};
 
 export const PaymentService = {
     getAllPayments,
     singleTransactionHistory,
     cancelPayment,
-    singleTransactionHistoryBySessionId
+    singleTransactionHistoryBySessionId,
 };

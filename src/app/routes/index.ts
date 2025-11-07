@@ -1,8 +1,8 @@
 import express from 'express';
-import { MessageRouters } from '../modules/Messages/message.route';
-import { NotificationsRouters } from '../modules/Notification/notification.route';
+import { MessageRouters } from '../modules/messages/message.route';
+import { NotificationsRouters } from '../modules/notification/notification.route';
 import { AuthRouters } from '../modules/auth/auth.routes';
-import { AssetRouters } from '../modules/Asset/asset.route';
+import { AssetRouters } from '../modules/asset/asset.route';
 import { UserRouters } from '../modules/user/user.routes';
 const router = express.Router();
 

@@ -21,7 +21,7 @@ const uploadMultipleAssets = async (files: Express.Multer.File[] | undefined) =>
     if (!files || files.length === 0) {
         throw new AppError(httpStatus.BAD_REQUEST, 'Provide at least one asset');
     }
-    console.log(files)
+    console.log(files);
     const locations = uploadFiles(files);
     return locations;
 };
@@ -36,10 +36,7 @@ const deleteMultipleAssets = async (paths: string[]) => {
     return deleted;
 };
 
-const updateAsset = async (
-    oldPath: string,
-    newFile: Express.Multer.File | undefined
-) => {
+const updateAsset = async (oldPath: string, newFile: Express.Multer.File | undefined) => {
     if (!newFile) {
         throw new AppError(httpStatus.BAD_REQUEST, 'Provide a new file to update the asset');
     }
@@ -47,10 +44,7 @@ const updateAsset = async (
     return newLocation;
 };
 
-const updateMultipleAsset = async (
-    oldPaths: string[],
-    newFiles: Express.Multer.File[] | undefined
-) => {
+const updateMultipleAsset = async (oldPaths: string[], newFiles: Express.Multer.File[] | undefined) => {
     if (!newFiles || newFiles.length === 0) {
         throw new AppError(httpStatus.BAD_REQUEST, 'Provide new files to update the assets');
     }
