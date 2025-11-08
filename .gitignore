@@ -4,5 +4,4 @@ node_modules
 .vercel
 generate-module.ts
 dist
-# keeping .env
-env
+.env
