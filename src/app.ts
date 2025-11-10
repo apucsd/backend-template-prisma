@@ -7,7 +7,7 @@ import path from 'path';
 import { StripeWebHook } from './app/utils/StripeUtils';
 const app: Application = express();
 
-app.post('/api/v1/payments/webhook', express.raw({ type: 'application/json' }), StripeWebHook);
+app.post('/api/v1/webhook', express.raw({ type: 'application/json' }), StripeWebHook);
 
 app.use(
     cors({
